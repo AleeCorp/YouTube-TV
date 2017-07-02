@@ -6,10 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
-using CefSharp.WinForms.Internals;
 
 namespace YouTube_TV
 {
@@ -17,22 +15,40 @@ namespace YouTube_TV
     {
         public Form1()
         {
+            Thread t = new Thread(new ThreadStart(SplashStart));
+            t.Start();
             InitializeComponent();
+            
         }
 
-        public CefSharp.WinForms.ChromiumWebBrowser browser;
+        public void SplashStart()
 
-        private void Form1_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("This project was created by AleeCorp! To exit press Alt+F4. This will take some time please wait...");
+            Application.Run(new Form2());
+        }
 
-            browser = new CefSharp.WinForms.ChromiumWebBrowser("www.youtube.com/tv");
-            {
-                Dock = DockStyle.Fill;
-                Size = new Size(514, 421);
-                Location = new Point(0, 0);
-            }
-            this.panel1.Controls.Add(browser);
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            this.timer1.Start();
+                      
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+           // this.progressBar1.Increment(1);
+           // Form2 frm = new Form2();
+            //frm.Show();
+            //this.Close();
         }
     }
 }
